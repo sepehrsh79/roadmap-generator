@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+alembic
+python-dotenv
+PyJWT
+passlib[bcrypt]
+httpx   # Optional for external API calls

@@ -17,7 +17,9 @@ router = APIRouter(
 )
 
 
-@router.post("/register", description='register new user', response_model=UserOutRegister)
+@router.post(
+    "/register", description="register new user", response_model=UserOutRegister
+)
 async def register(
     data: UserIn, db_session: DBManager = Depends(get_db)
 ) -> UserOutRegister:
@@ -35,7 +37,9 @@ async def login(
     try:
         tokens = await AuthController(
             db_session=db_session, redis_session=redis_db
-        ).login(**data.dict(), existing_session_id=request.cookies.get("Session-Id", ""))
+        ).login(
+            **data.dict(), existing_session_id=request.cookies.get("Session-Id", "")
+        )
     except Exception as e:
         raise e
     response.set_cookie(
@@ -45,6 +49,14 @@ async def login(
         httponly=True,
         samesite="strict",
     )
+    if tokens.access_token:
+        response.set_cookie(
+            key="Access-Token",
+            value=tokens.access_token,
+            secure=True,
+            httponly=True,
+            samesite="strict",
+        )
     return {
         "access_token": tokens.access_token,
         "refresh_token": tokens.refresh_token,
@@ -65,7 +77,7 @@ async def verify(
         session_id=request.cookies.get("Session-Id", ""),
         code=code,
     )
-    return 'user verify successfully'
+    return {"message": "user verify successfully"}
 
 
 @router.post("/refresh", description="refresh access token")

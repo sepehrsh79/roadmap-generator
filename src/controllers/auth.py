@@ -87,7 +87,7 @@ class AuthController:
         )
         # if user was verified
         session_id_redis = await self.redis_session.get(existing_session_id)
-        if session_id_redis == str(user.id):
+        if str(session_id_redis) == str(user.id):
             token.access_token = self.jwt_handler.encode(payload={"user_id": str(user.id)})
             return token
 
@@ -125,7 +125,7 @@ class AuthController:
         )
         if not user_id or len(str(user_id)) < 5:
             raise UnauthorizedException("Invalid Refresh Token")
-        elif session_id_redis != user_id:
+        elif session_id_redis != str(user_id):
             user = await self.user_crud.get_by_id(self.db_session, user_id=user_id)
             assert user is not None
             if not totp.TOTP(user.gauth).verify(code):

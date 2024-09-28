@@ -1,3 +1,4 @@
+import sqlalchemy as sa
 from sqlalchemy.future import select
 
 from src.core.database import DBManager
@@ -31,7 +32,6 @@ class UserCRUD:
             )
         )
         return result
-
 
     @staticmethod
     async def create(db_session: DBManager, username: str, password: str, gauth: str):

@@ -45,7 +45,7 @@ async def get_current_user_with_refresh(request_data: RefreshToken):
     if not user_id:
         raise ForbiddenException("Invalid Refresh Token")
 
-    # Step 5: Return the user_id or authenticated user data
+    # Return the user_id or authenticated user data
     return user_id
 
 

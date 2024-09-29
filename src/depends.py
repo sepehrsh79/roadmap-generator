@@ -10,7 +10,9 @@ from src.schema.auth import RefreshToken
 http_bearer = HTTPBearer()
 
 
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(http_bearer)):
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(http_bearer),
+):
     # Check if the authorization scheme is 'Bearer'
     if credentials.scheme != "Bearer":
         raise ForbiddenException("Invalid Header")
@@ -52,4 +54,5 @@ async def get_current_user_with_refresh(request_data: RefreshToken):
 async def get_current_user_from_db(
     db_session: DBManager = Depends(get_db), user_id: str = Depends(get_current_user)
 ):
+    assert user_id is not None
     return await AuthController(db_session).me(user_id)

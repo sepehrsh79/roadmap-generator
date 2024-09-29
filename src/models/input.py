@@ -12,6 +12,7 @@ from src.enums import (
     TimeCommitmentEnum,
     DomainEnum,
 )
+from src.models import User
 
 
 class Input(SQLBase, IdMixin, TimestampMixin):
@@ -21,13 +22,13 @@ class Input(SQLBase, IdMixin, TimestampMixin):
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
     )
-    user: Mapped["User"] = relationship("User", back_populates="inputs")
+    user: Mapped[User] = relationship("User", back_populates="inputs")
     domain: Mapped[DomainEnum] = mapped_column(default=DomainEnum.others)
     level: Mapped[LevelEnum] = mapped_column(default=LevelEnum.beginner)
     age: Mapped[int]
     goal: Mapped[str | None]
-    learnig_style: Mapped[str | list] = mapped_column(ARRAY(String()), default=[])
-    cost_type: Mapped[Annotated[CostTypeEnum, Enum(CostTypeEnum)]] = mapped_column(
+    learning_style: Mapped[str | list] = mapped_column(ARRAY(String()), default=[])
+    cost_type: Mapped[Annotated[CostTypeEnum, Enum[CostTypeEnum]]] = mapped_column(
         default=CostTypeEnum.both
     )
     need_certificate: Mapped[bool] = mapped_column(default=False)

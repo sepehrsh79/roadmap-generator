@@ -106,6 +106,7 @@ class AuthController:
         if not user:
             raise BadRequestException("Invalid credentials")
         return UserOut(
+            id=user.id,
             username=user.username,
             updated_at=user.updated_at,
             created_at=user.created_at,

@@ -1,6 +1,6 @@
 import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 
 
 class CurrentUser(BaseModel):
@@ -17,6 +17,7 @@ class UserIn(BaseModel):
 
 class UserOut(CurrentUser):
     username: str
+    email: EmailStr
     updated_at: datetime.datetime
     created_at: datetime.datetime
 

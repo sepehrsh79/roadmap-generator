@@ -1,0 +1,6 @@
+inputs models []
+inputs schema []
+roadmap models []
+roadmap schema []
+
+ai khodesh zaban barname nvisi va framework va tools va technoloy suggest bede

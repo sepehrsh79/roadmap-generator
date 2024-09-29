@@ -1,14 +1,13 @@
-from sqlalchemy import ARRAY, Enum, String, BigInteger, ForeignKey
+from sqlalchemy import ARRAY, Enum, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, validates, relationship
 
 from src.core.database.base import SQLBase
 from src.core.database.mixin import TimestampMixin, IdMixin
 
-from typing import Annotated, ForwardRef
+from typing import Annotated
 
 from src.enums import (
     LevelEnum,
-    LearningStyleEnum,
     CostTypeEnum,
     TimeCommitmentEnum,
     DomainEnum,

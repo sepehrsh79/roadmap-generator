@@ -6,6 +6,9 @@ from .input import (
     DomainEnum,
 )
 
+from .roadmap import StatusEnum
+
+
 __all__ = [
     "LevelEnum",
     "LearningStyleEnum",

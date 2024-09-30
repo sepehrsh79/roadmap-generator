@@ -5,6 +5,7 @@ from src.core.database.base import SQLBase
 from src.core.database.mixin import TimestampMixin, IdMixin
 
 from src.enums import StatusEnum
+from src.models import User
 
 
 class Roadmap(SQLBase, IdMixin, TimestampMixin):
@@ -14,7 +15,7 @@ class Roadmap(SQLBase, IdMixin, TimestampMixin):
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
     )
-    user: Mapped["User"] = relationship("User", back_populates="roadmaps")
+    user: Mapped[User] = relationship("User", back_populates="roadmaps")
     topic: Mapped[str]
     description: Mapped[str | None] = mapped_column(default=None)
     status: Mapped[StatusEnum] = mapped_column(default=StatusEnum.learning)
@@ -30,5 +31,5 @@ class LearningDay(SQLBase, IdMixin, TimestampMixin):
     roadmap: Mapped["Roadmap"] = relationship("Roadmap", back_populates="learning_days")
     title: Mapped[str]
     description: Mapped[str | None] = mapped_column(default=None)
-    checked: Mapped[bool]
+    checked: Mapped[bool] = mapped_column(default=False)
     course_link: Mapped[str | None]

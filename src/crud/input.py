@@ -10,14 +10,14 @@ class InputCRUD:
     @staticmethod
     async def get_query(db_session: DBManager, user_id: int):
         result = await db_session.execute(select(Input).filter(Input.user_id == user_id))
-        users = result.scalars().all()
-        return users
+        inputs = result.scalars().all()
+        return inputs
 
     @staticmethod
     async def get_by_id(db_session: DBManager, input_id: int, user_id: int):
         result = await db_session.execute(select(Input).filter(Input.id == input_id & Input.user_id == user_id))
-        user = result.scalars().first()
-        return user
+        input = result.scalars().first()
+        return input
 
     @staticmethod
     async def create(db_session: DBManager, **kwargs):

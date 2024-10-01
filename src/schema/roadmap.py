@@ -1,8 +1,8 @@
 import datetime
 
-from pydantic import BaseModel, conint, constr
+from pydantic import BaseModel
 
-from src.enums import LevelEnum, DomainEnum, StatusEnum
+from src.enums import StatusEnum
 
 
 class RoadmapBase(BaseModel):

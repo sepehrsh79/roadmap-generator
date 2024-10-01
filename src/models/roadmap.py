@@ -15,10 +15,11 @@ class Roadmap(SQLBase, IdMixin, TimestampMixin):
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
     )
-    user: Mapped[User] = relationship("User", back_populates="roadmaps")
+    user: Mapped["User"] = relationship("User", back_populates="roadmaps")
     topic: Mapped[str]
     description: Mapped[str | None] = mapped_column(default=None)
     status: Mapped[StatusEnum] = mapped_column(default=StatusEnum.learning)
+    learning_days: Mapped[list["LearningDay"]] = relationship(back_populates="roadmap")
 
 
 class LearningDay(SQLBase, IdMixin, TimestampMixin):

@@ -1,4 +1,5 @@
 import datetime
+from uuid import UUID
 
 from pydantic import BaseModel, conint, constr
 
@@ -6,10 +7,11 @@ from src.enums import LevelEnum, DomainEnum, CostTypeEnum, TimeCommitmentEnum
 
 
 class InputBase(BaseModel):
-    domain: DomainEnum | str
+    domain: DomainEnum
+    specific_tool: str = ""
     level: LevelEnum = LevelEnum.beginner
     age: conint(gt=0) = 25  # Age should be positive
-    goal: constr(max_length=255) | None = None
+    goal: constr(max_length=255) = ""
     learning_style: list[str] = []
     cost_type: CostTypeEnum = CostTypeEnum.both
     need_certificate: bool = False

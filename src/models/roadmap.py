@@ -33,6 +33,14 @@ class LearningDay(SQLBase, IdMixin, TimestampMixin):
     )
     roadmap: Mapped["Roadmap"] = relationship("Roadmap", back_populates="learning_days")
     title: Mapped[str]
-    description: Mapped[str | None] = mapped_column(default=None)
     checked: Mapped[bool] = mapped_column(default=False)
     course_link: Mapped[str | None]
+    learning_methods: Mapped[str | None]
+    online_groups_and_forums: Mapped[str | None]
+    time_planning: Mapped[str | None]
+    course: Mapped[str | None]
+    course_level: Mapped[str | None]
+    course_teacher: Mapped[str | None]
+    course_type: Mapped[str | None]
+    fee: Mapped[str | None]
+    has_certificate: Mapped[str | None]

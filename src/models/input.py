@@ -26,6 +26,7 @@ class Input(SQLBase, IdMixin, TimestampMixin):
     )
     user: Mapped["User"] = relationship("User", back_populates="inputs")
     domain: Mapped[DomainEnum] = mapped_column(default=DomainEnum.backend_development)
+    specific_tool: Mapped[str | None] = mapped_column(default=None, nullable=True)
     level: Mapped[LevelEnum] = mapped_column(default=LevelEnum.beginner)
     age: Mapped[int]
     goal: Mapped[str | None]

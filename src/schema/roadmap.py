@@ -27,6 +27,15 @@ class LearningDayBase(BaseModel):
     description: str | None = None
     course_link: str | None = None
     checked: bool = False
+    learning_methods: str | None
+    online_groups_and_forums: str | None
+    time_planning: str | None
+    course: str | None
+    course_level: str | None
+    course_teacher: str | None
+    course_type: str | None
+    fee: str | None
+    has_certificate: str | None
 
 
 class LearningDayOut(LearningDayBase):

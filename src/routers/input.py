@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, BackgroundTasks
 
 from src.controllers.input import InputController
 from src.core.database import DBManager, get_db
@@ -17,10 +17,15 @@ router = APIRouter(
 @router.post("/", description="create user inputs", response_model=InputOut)
 async def create_user_input(
         data: InputIn,
+        background_tasks: BackgroundTasks,
         db_session: DBManager = Depends(get_db),
         current_user: UserOut = Depends(get_current_user_from_db),
 ) -> InputOut:
-    return await InputController(db_session=db_session, current_user=current_user).create_user_input(**data.dict())
+    return await InputController(
+        db_session=db_session,
+        current_user=current_user,
+        background_tasks=background_tasks
+    ).create_user_input(**data.dict())
 
 
 @router.get("/", description="get user inputs")

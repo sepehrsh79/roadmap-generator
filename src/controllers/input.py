@@ -1,5 +1,8 @@
+from fastapi import BackgroundTasks
+
 from src.core.database import DBManager
 from src.crud.input import InputCRUD
+from src.repository.chatGPT import create_roadmap_in_background
 from src.schema.input import InputOut
 
 from src.schema.user import UserOut
@@ -12,15 +15,19 @@ class InputController:
         self,
         db_session: DBManager,
         current_user: UserOut,
+        background_tasks: BackgroundTasks | None = None,
         input_crud: InputCRUD | None = None,
     ):
         self.input_crud = input_crud or self.input_crud
         self.db_session = db_session
         self.current_user = current_user
+        self.background_tasks = background_tasks
 
     async def create_user_input(self, **kwargs) -> InputOut:
-        input = await self.input_crud.create(**kwargs, db_session=self.db_session)
+        input = await self.input_crud.create(**kwargs, db_session=self.db_session, user_id=self.current_user.id)
         assert input is not None
+        # self.background_tasks.add_task(create_roadmap_in_background, input=input, db_session=self.db_session)
+        await create_roadmap_in_background(input=input, db_session=self.db_session)
         return InputOut.from_orm(input)
 
     async def get_user_input(self, input_id: int) -> InputOut:

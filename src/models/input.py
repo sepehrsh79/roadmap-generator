@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from sqlalchemy import ARRAY, Enum, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, validates, relationship
 
@@ -18,12 +20,12 @@ from src.models import User
 class Input(SQLBase, IdMixin, TimestampMixin):
     __tablename__ = "inputs"
 
-    user_id: Mapped[int] = mapped_column(
+    user_id: Mapped[UUID] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
     )
-    user: Mapped[User] = relationship("User", back_populates="inputs")
-    domain: Mapped[DomainEnum] = mapped_column(default=DomainEnum.others)
+    user: Mapped["User"] = relationship("User", back_populates="inputs")
+    domain: Mapped[DomainEnum] = mapped_column(default=DomainEnum.backend_development)
     level: Mapped[LevelEnum] = mapped_column(default=LevelEnum.beginner)
     age: Mapped[int]
     goal: Mapped[str | None]

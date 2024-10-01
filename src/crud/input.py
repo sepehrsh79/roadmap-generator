@@ -1,9 +1,9 @@
-import sqlalchemy as sa
+from uuid import UUID
+
 from sqlalchemy.future import select
 
 from src.core.database import DBManager
 from src.models import Input
-from src.schema.user import UserQuery
 
 
 class InputCRUD:
@@ -20,8 +20,8 @@ class InputCRUD:
         return input
 
     @staticmethod
-    async def create(db_session: DBManager, **kwargs):
-        db_input = Input(**kwargs)
+    async def create(db_session: DBManager, user_id: UUID, **kwargs):
+        db_input = Input(**kwargs, user_id=user_id)
         db_session.add(db_input)
         await db_session.flush()
         return db_input

@@ -26,8 +26,15 @@ class InputController:
     async def create_user_input(self, **kwargs) -> InputOut:
         input = await self.input_crud.create(**kwargs, db_session=self.db_session, user_id=self.current_user.id)
         assert input is not None
-        # self.background_tasks.add_task(create_roadmap_in_background, input=input, db_session=self.db_session)
-        await create_roadmap_in_background(input=input, db_session=self.db_session)
+        self.background_tasks.add_task(create_roadmap_in_background, input=input,
+                                       user_id=self.current_user.id,
+                                       db_session=self.db_session
+                                       )
+        # await create_roadmap_in_background(
+        #     input = input,
+        #     user_id = self.current_user.id,
+        #     db_session = self.db_session
+        # )
         return InputOut.from_orm(input)
 
     async def get_user_input(self, input_id: int) -> InputOut:

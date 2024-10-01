@@ -1,4 +1,5 @@
 import datetime
+from uuid import UUID
 
 from pydantic import BaseModel
 
@@ -13,7 +14,7 @@ class RoadmapBase(BaseModel):
 
 class RoadmapOut(RoadmapBase):
     id: int
-    user_id: int
+    user_id: UUID
     updated_at: datetime.datetime
     created_at: datetime.datetime
 
@@ -31,7 +32,7 @@ class LearningDayBase(BaseModel):
 class LearningDayOut(LearningDayBase):
     id: int
     roadmap_id: int
-    user_id: int
+    user_id: UUID
     updated_at: datetime.datetime
     created_at: datetime.datetime
 

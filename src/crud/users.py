@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from sqlalchemy.future import select
 
 from src.core.database import DBManager
@@ -18,7 +20,7 @@ class UserCRUD:
         return user.first()
 
     @staticmethod
-    async def get_by_id(db_session: DBManager, user_id: str):
+    async def get_by_id(db_session: DBManager, user_id: UUID):
         result = await db_session.execute(select(User).filter(User.id == user_id))
         user = result.scalars().first()
         return user

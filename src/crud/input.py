@@ -8,13 +8,13 @@ from src.models import Input
 
 class InputCRUD:
     @staticmethod
-    async def get_query(db_session: DBManager, user_id: int):
+    async def get_query(db_session: DBManager, user_id: UUID):
         result = await db_session.execute(select(Input).filter(Input.user_id == user_id))
         inputs = result.scalars().all()
         return inputs
 
     @staticmethod
-    async def get_by_id(db_session: DBManager, input_id: int, user_id: int):
+    async def get_by_id(db_session: DBManager, input_id: int, user_id: UUID):
         result = await db_session.execute(select(Input).filter(Input.id == input_id & Input.user_id == user_id))
         input = result.scalars().first()
         return input

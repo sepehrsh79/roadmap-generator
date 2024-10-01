@@ -21,7 +21,7 @@ class InputBase(BaseModel):
 
 class InputOut(InputBase):
     id: int
-    user_id: int
+    user_id: UUID
     updated_at: datetime.datetime
     created_at: datetime.datetime
 

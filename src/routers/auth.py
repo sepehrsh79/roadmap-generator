@@ -7,7 +7,7 @@ from src.depends import (
     get_current_user_from_db,
     get_current_user_with_refresh,
 )
-from src.schema.user import UserIn, UserOut, UserOutRegister
+from src.schema.user import UserRegister, UserOut, UserOutRegister, UserLogin
 
 router = APIRouter(
     prefix="/auth",
@@ -21,14 +21,14 @@ router = APIRouter(
     "/register", description="register new user", response_model=UserOutRegister
 )
 async def register(
-    data: UserIn, db_session: DBManager = Depends(get_db)
+    data: UserRegister, db_session: DBManager = Depends(get_db)
 ) -> UserOutRegister:
     return await AuthController(db_session=db_session).register(**data.dict())
 
 
 @router.post("/login", description="Create access and refresh tokens for verified user")
 async def login(
-    data: UserIn,
+    data: UserLogin,
     request: Request,
     response: Response,
     db_session: DBManager = Depends(get_db),

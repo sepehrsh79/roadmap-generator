@@ -36,7 +36,7 @@ class AuthController:
         self.db_session = db_session
         self.redis_session = redis_session
 
-    async def register(self, password: str, username: str) -> UserOutRegister:
+    async def register(self, password: str, username: str, email: str) -> UserOutRegister:
         user = await self.user_crud.get_by_username(
             self.db_session,
             username=username,
@@ -50,6 +50,7 @@ class AuthController:
             db_session=self.db_session,
             username=username,
             password=password,
+            email=email,
             gauth=str(random_base32()),
         )
 
@@ -62,6 +63,7 @@ class AuthController:
             updated_at=user.updated_at,
             created_at=user.created_at,
             gauth=user.gauth,
+            email=user.email,
             qr_img=base64.b64encode(buffered.getvalue()).decode(),
         )
 
@@ -108,6 +110,7 @@ class AuthController:
         return UserOut(
             id=user.id,
             username=user.username,
+            email=user.email,
             updated_at=user.updated_at,
             created_at=user.created_at,
         )

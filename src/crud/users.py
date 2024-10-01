@@ -1,4 +1,3 @@
-import sqlalchemy as sa
 from sqlalchemy.future import select
 
 from src.core.database import DBManager
@@ -34,9 +33,8 @@ class UserCRUD:
         return result
 
     @staticmethod
-    async def create(db_session: DBManager, username: str, password: str, gauth: str):
-        db_user = User(username=username, password=password, gauth=gauth)
+    async def create(db_session: DBManager, username: str, password: str, email: str, gauth: str):
+        db_user = User(username=username, password=password, email=email, gauth=gauth)
         db_session.add(db_user)
-        # await session.flush()
-        # await session.refresh(db_user)
+        await db_session.commit()
         return db_user

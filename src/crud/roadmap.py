@@ -38,3 +38,17 @@ class RoadmapCRUD:
         learning_day.checked = ~learning_day.checked
         db_session.commit(learning_day)
         return learning_day
+
+    @staticmethod
+    async def create_roadmap(db_session: DBManager, user_id: UUID, **kwargs):
+        db_road_map = Roadmap(**kwargs, user_id=user_id)
+        db_session.add(db_road_map)
+        await db_session.commit()
+        return db_road_map
+
+    @staticmethod
+    async def create_learning_day(db_session: DBManager, roadmap_id: id, **kwargs):
+        db_learning_day = LearningDay(**kwargs, roadmap_id=roadmap_id)
+        db_session.add(db_learning_day)
+        await db_session.commit()
+        return db_learning_day

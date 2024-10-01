@@ -6,9 +6,9 @@ from src.enums import LevelEnum, DomainEnum, CostTypeEnum, TimeCommitmentEnum
 
 
 class InputBase(BaseModel):
-    domain: DomainEnum = DomainEnum.others
+    domain: DomainEnum | str
     level: LevelEnum = LevelEnum.beginner
-    age: conint(gt=0)  # Age should be positive
+    age: conint(gt=0) = 25  # Age should be positive
     goal: constr(max_length=255) | None = None
     learning_style: list[str] = []
     cost_type: CostTypeEnum = CostTypeEnum.both

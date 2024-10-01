@@ -6,12 +6,12 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 class TimestampMixin:
     created_at: Mapped[datetime.datetime] = mapped_column(
-        DateTime, default=datetime.datetime.now(), nullable=False
+        DateTime, default=datetime.datetime.now, nullable=False
     )
     updated_at: Mapped[datetime.datetime] = mapped_column(
         DateTime,
-        default=datetime.datetime.now(),
-        onupdate=datetime.datetime.now(),
+        default=datetime.datetime.now,
+        onupdate=datetime.datetime.now,
         nullable=False,
     )
 

@@ -42,4 +42,3 @@ class DomainEnum(enum.Enum):
     game_development = "game Development"
     dev_ops = "DevOps"
     cybersecurity_development = "CyberSecurity Development"
-    others = "Others"

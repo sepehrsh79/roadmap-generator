@@ -10,4 +10,5 @@ class User(SQLBase, UUIDMixin, TimestampMixin):
     password: Mapped[str] = mapped_column(default=None)
     gauth: Mapped[str] = mapped_column(default=None)
     email: Mapped[str | None] = mapped_column(unique=True, default=None, index=True)
-    inputs: Mapped[list["Input"]] = relationship(back_populates="users")
+    inputs: Mapped[list["Input"]] = relationship(back_populates="user")
+    roadmaps: Mapped[list["Roadmap"]] = relationship(back_populates="user")

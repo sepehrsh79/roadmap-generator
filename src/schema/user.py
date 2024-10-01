@@ -1,19 +1,24 @@
 import datetime
+from uuid import UUID
 
 from pydantic import BaseModel, Field, EmailStr
 
 
 class CurrentUser(BaseModel):
-    id: int | None = Field(None, description="User ID")
+    id: UUID | None = Field(None, description="User ID")
 
     class Config:
         validate_assignment = True
 
 
-class UserIn(BaseModel):
+class UserRegister(BaseModel):
     username: str
     password: str
+    email: EmailStr
 
+class UserLogin(BaseModel):
+    username: str
+    password: str
 
 class UserOut(CurrentUser):
     username: str

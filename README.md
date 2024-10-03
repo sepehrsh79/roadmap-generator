@@ -11,14 +11,14 @@
 ## Overview
 
 The Roadmap-Generator is a tool that helps to create a learning program with ChatGPT.
-It does this by using two powerful framework: Playwright and FastAPI. Playwright is a web automation tool that can navigate websites, click buttons, and scrape data from web pages. FastAPI is a web framework that allows for the creation of APIs in Python, which is the language used in this project.
+It does this by using two powerful frameworks: Playwright and FastAPI. Playwright is a web automation tool that can navigate websites, click buttons, and scrape data from web pages. FastAPI is a web framework that allows for the creation of APIs in Python, which is the language used in this project.
 
-this generator give us a complete personalized training program based on what we give him as the input, this generator gives us a complete personalized training program based on what we give him as the input. the Roadmap-Generator is a powerful and flexible tool that can save you time in creating your personalized learning program and can help you learn new things continuously.
+This generator gives us a complete personalized training program based on what we give him as input. The Roadmap-Generator is a powerful and flexible tool that can save you time creating your personalized learning program and help you continuously learn new things.
 
 
-## Installation And How to use
+## Installation And How to Use
 
-- 1. First you need to clone this repository.
+- 1. First, you need to clone this repository.
 - 2. Then you need to setup your own environment and install requirements
     ```bash
        pip install -r requirements.txt
@@ -27,7 +27,7 @@ this generator give us a complete personalized training program based on what we
     ```bash
        pyhton main.py
     ```
-- 4. Register or login in to the Roadmap-Generator and use APIs to get you a personalized learning program according to inputs. 🚀
+- 4. Register or login into the Roadmap-Generator and use APIs to get you a personalized learning program according to inputs. 🚀
 
 
 ## License
